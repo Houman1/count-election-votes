@@ -1,17 +1,18 @@
+from pathlib import Path
 import openpyxl
 import shutil
 
 #path to ballts (xlsx files)
-path_to_ballots = r"C:/Users/houma/PycharmProjects/CountElectionVotes/Sample Votes/"
-# file = "345t64.xlsx"
-file = "33333.xlsx"
-ballot = path_to_ballots + file
+# path_to_ballots = r"C:/Users/houma/PycharmProjects/CountElectionVotes/Sample Votes/"
+# # file = "345t64.xlsx"
+# file = "33333.xlsx"
+# ballot = path_to_ballots + file
 
 
 def read_in_ballot(ballot_file):
 
     # Load the workbook
-    workbook = openpyxl.load_workbook(ballot)
+    workbook = openpyxl.load_workbook(ballot_file)
 
     # Select the active worksheet
     worksheet = workbook.active
@@ -54,13 +55,27 @@ def read_in_ballot(ballot_file):
     #Check ballot is valid
     if len(votes_only) == 9:
         print(f"vote is valid")
+
+        dst = r'C:/Users/houma/PycharmProjects/CountElectionVotes/counted-ballots'
+        # use the shutil.move() function to move the file
+        shutil.move(ballot_file, dst)
         return votes_only
     else:
         print(f"invalid vote")
-        dst = r'C:\Users\houma\PycharmProjects\CountElectionVotes\spoiled-ballots'
+        dst = r'C:/Users/houma/PycharmProjects/CountElectionVotes/spoiled-ballots'
 
         # use the shutil.move() function to move the file
         shutil.move(ballot_file, dst)
 
 
-read_in_ballot(ballot)
+def sort_all_ballots(folder_path):
+
+
+    file_list = Path(folder_path).rglob('*.xls*')
+    for file in file_list:
+        print(file)
+        read_in_ballot(file)
+
+
+ballots_folder = r"C:/Users/houma/PycharmProjects/CountElectionVotes/sample-votes/"
+sort_all_ballots(ballots_folder)
