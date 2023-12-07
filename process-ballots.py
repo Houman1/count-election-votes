@@ -74,6 +74,7 @@ def sort_all_ballots(folder_path):
     file_list = Path(folder_path).rglob('*.xls*')
     for file in file_list:
         print(file)
+        print(type(file))
         read_in_ballot(file)
 
 
