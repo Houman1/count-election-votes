@@ -3,6 +3,7 @@ import os
 import openpyxl
 import shutil
 import logging
+from collections import Counter
 
 logger = logging.getLogger("ballot_reader")
 logging.basicConfig(level = logging.INFO)
@@ -67,18 +68,29 @@ class Ballot_Reader():
 
         return votes
     
-    
+
     def format_votes_list(votes):
 
         formatted_votes = []
         for vote in votes:
-            formatted_votes.append(" ".join(vote[:-1]).lower())
+            format_vote = " ".join(vote[:-1]).lower()
+            formatted_votes.append(format_vote)
 
-        print(f"FORMATTED VOTES: {formatted_votes}")  
-        return formatted_votes          
+        logger.info(f"formatted votes: {formatted_votes}")  
+        sorted(formatted_votes)
+        return formatted_votes
 
 
+    def count_votes(all_votes):
 
+        unique_votes = set(all_votes)
+        print(f"All individuals voted for: {unique_votes}")
+
+        vote_counts = Counter(all_votes)
+        # print(f"Results: {vote_counts}")
+        print(f"Results: {vote_counts}")
+
+        
     def sort_counted_and_spoiled_ballots(votes, ballot, ballot_folder, expected_number_of_votes = 9 ):
         '''add checks for by-election vs regular, allow choice of how many people to expect to see if the vote is valid
         also create new directories one for counted and one for spoiled.'''

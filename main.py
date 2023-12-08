@@ -35,9 +35,10 @@ for file in files:
         cleaned_data = ballot_reader.clean_up_data(column_data)
         sorted_votes = ballot_reader.sort_votes(ballot_workbook, cleaned_data, expected_number_of_votes)
         format_votes_list = ballot_reader.format_votes_list(sorted_votes)
-        all_votes.append(format_votes_list)
-
+        all_votes.append(format_votes_list[0])
+        
     
 print(f"ALL VOTES: {all_votes}")
-print(f"Number of ballots: {number_of_ballots}")
+counted_votes = ballot_reader.count_votes(all_votes)
+# print(f"Number of ballots: {number_of_ballots}")
 # ballot_reader.sort_counted_and_spoiled_ballots(counted_votes, ballot_read, ballot_folder, expected_number_of_votes)
