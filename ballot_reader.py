@@ -27,7 +27,7 @@ class Ballot_Reader():
             trimmed_row = []
             for value in row:
                 if value is not None:
-                    logger.info(value)
+                    # logger.info(value)
                     trimmed_row.append(value)
             all_columns.append(trimmed_row)
 
@@ -45,23 +45,36 @@ class Ballot_Reader():
         return all_values
 
 
-    def count_votes(workbook, all_values):
+    def sort_votes(workbook, all_values, expected_number_of_votes):
 
         #Count votes
         vote_list = [value for value in all_values if len(value) > 3]
-
+        del vote_list[0]
+        # print(f" VOTE LIST: {vote_list}")
         votes = []
-        for i in vote_list:
-            if 'x' in i:
-                votes.append(i)
+        for vote in vote_list:
+            if 'x' or 'X' in vote:
+                votes.append(vote)
 
-        for vote in votes:
-            logger.info(vote)
+        number_of_votes = len(votes)
+        logger.info(f"number of votes: {number_of_votes}")
+
+        if not number_of_votes == expected_number_of_votes:
+            logger.warn(f"number of votes: {number_of_votes}, doesn't match expected number of votes: {expected_number_of_votes}")
 
         # Close the workbook
         workbook.close()
 
         return votes
+    
+    def format_votes_list(votes):
+
+        formatted_votes = []
+        for vote in votes:
+            formatted_votes.append(" ".join(vote[:-1]).lower())
+
+        print(f"FORMATTED VOTES: {formatted_votes}")  
+        return formatted_votes          
 
     def sort_counted_and_spoiled_ballots(votes, ballot, ballot_folder, expected_number_of_votes = 9 ):
         '''add checks for by-election vs regular, allow choice of how many people to expect to see if the vote is valid
