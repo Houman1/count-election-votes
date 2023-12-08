@@ -67,6 +67,7 @@ class Ballot_Reader():
 
         return votes
     
+    
     def format_votes_list(votes):
 
         formatted_votes = []
@@ -75,6 +76,8 @@ class Ballot_Reader():
 
         print(f"FORMATTED VOTES: {formatted_votes}")  
         return formatted_votes          
+
+
 
     def sort_counted_and_spoiled_ballots(votes, ballot, ballot_folder, expected_number_of_votes = 9 ):
         '''add checks for by-election vs regular, allow choice of how many people to expect to see if the vote is valid
