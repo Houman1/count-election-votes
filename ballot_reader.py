@@ -7,7 +7,7 @@ from collections import Counter
 
 logger = logging.getLogger("ballot_reader")
 logging.basicConfig(level = logging.INFO)
-# logger = logging.Logger("ballot_reader")
+
 
 
 class Ballot_Reader():
@@ -17,7 +17,8 @@ class Ballot_Reader():
 
         # Load the workbook
         workbook = openpyxl.load_workbook(ballot)
-        logger.info("Reading in ballot")
+        logger.info(f"Reading in ballot: {ballot}")
+        
         # Select the active worksheet
         worksheet = workbook.active
 
@@ -25,7 +26,6 @@ class Ballot_Reader():
         clean_data = Ballot_Reader._remove_empty_values(read_columns)
 
         return clean_data, workbook
-
 
 
     def sort_votes(workbook, all_values, expected_number_of_votes, file_path, ballot_folder):
@@ -62,14 +62,11 @@ class Ballot_Reader():
         return
 
 
-
     def count_votes(all_votes):
 
         vote_counts = Counter(all_votes)
 
         logger.info(f"Results: {vote_counts}")
-
-
 
 
     #Private methods
@@ -110,7 +107,6 @@ class Ballot_Reader():
         sorted(formatted_votes)
         
         return formatted_votes
-
 
 
     def _sort_spoiled_ballots(file_path, ballot_folder):
