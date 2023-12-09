@@ -30,15 +30,13 @@ for file in files:
 
         logger.info(f"FILE: {file}")
         logger.info(f"FILE PATH: {file_path}")
-        ballot_read, ballot_workbook = ballot_reader.read_in_ballot(file_path)
-        column_data = ballot_reader.read_columns(ballot_read)
-        cleaned_data = ballot_reader.clean_up_data(column_data)
-        sorted_votes = ballot_reader.sort_votes(ballot_workbook, cleaned_data, expected_number_of_votes)
-        format_votes_list = ballot_reader.format_votes_list(sorted_votes)
-        all_votes.append(format_votes_list[0])
+
+        cleaned_data, ballot_workbook = ballot_reader.read_in_ballot(file_path)
+        sorted_votes = ballot_reader.sort_votes(ballot_workbook, cleaned_data, expected_number_of_votes, file_path, ballot_folder)
         
-    
-print(f"ALL VOTES: {all_votes}")
+        if sorted_votes:
+            all_votes.append(sorted_votes[0])
+        
 counted_votes = ballot_reader.count_votes(all_votes)
-# print(f"Number of ballots: {number_of_ballots}")
-# ballot_reader.sort_counted_and_spoiled_ballots(counted_votes, ballot_read, ballot_folder, expected_number_of_votes)
+
+logger.info(f"Number of ballots: {number_of_ballots}")
