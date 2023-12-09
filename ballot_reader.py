@@ -9,7 +9,6 @@ logger = logging.getLogger("ballot_reader")
 logging.basicConfig(level = logging.INFO)
 
 
-
 class Ballot_Reader():
 
 
@@ -18,7 +17,7 @@ class Ballot_Reader():
         # Load the workbook
         workbook = openpyxl.load_workbook(ballot)
         logger.info(f"Reading in ballot: {ballot}")
-        
+
         # Select the active worksheet
         worksheet = workbook.active
 
