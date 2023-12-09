@@ -12,13 +12,13 @@ by_election_ballot_folder = r"C:\Users\Houmqn\Desktop\sample-ballots-by-election
 ridvan_ballot_folder_with_old_formats = r"C:\Users\Houmqn\Desktop\sample-ballots-ridvan"
 ridvan_ballot_folder_without_old_formats = r"C:\Users\Houmqn\Desktop\sample-ballots-ridvan-without-old-formats"
 
-ballot_folder = by_election_ballot_folder
+ballot_folder = ridvan_ballot_folder_without_old_formats
+expected_number_of_votes = 9
 
 # List all files in the directory
 files = os.listdir(ballot_folder)
 
 number_of_ballots = len(files)
-expected_number_of_votes = 1
 all_votes = []
 
 for file in files:

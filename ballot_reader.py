@@ -50,7 +50,7 @@ class Ballot_Reader():
             logger.warn(f"number of votes: {number_of_votes}, doesn't match expected number of votes: {expected_number_of_votes}")
            
             #Sort spoiled votes
-            Ballot_Reader._sort_spoiled_ballots(number_of_votes, expected_number_of_votes, file_path, ballot_folder)
+            Ballot_Reader._sort_spoiled_ballots(file_path, ballot_folder)
 
         else:
             #format the vote entries
