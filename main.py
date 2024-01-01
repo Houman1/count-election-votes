@@ -1,6 +1,5 @@
 import os
 import ballot_reader
-import converter
 import logging
 
 
@@ -8,15 +7,15 @@ logger = logging.getLogger("main app")
 logging.basicConfig(level = logging.INFO)
 
 ballot_reader = ballot_reader.Ballot_Reader
-format_converter = converter.Converter 
 
-by_election_ballot_folder = r"C:\Users\Houmqn\Desktop\sample-ballots-by-election"
-ridvan_ballot_folder_with_old_formats = r"C:\Users\Houmqn\Desktop\sample-ballots-ridvan"
-ridvan_ballot_folder_without_old_formats = r"C:\Users\Houmqn\Desktop\sample-ballots-ridvan-without-old-formats"
+#by_election_ballot_folder = r"C:\Users\Houmqn\Desktop\sample-ballots-by-election"
+#ridvan_ballot_folder_with_old_formats = r"C:\Users\Houmqn\Desktop\sample-ballots-ridvan"
+# ridvan_ballot_folder_without_old_formats = r"C:\Users\Houmqn\Desktop\sample-ballots-ridvan-without-old-formats"
+ridvan_sample_ballots = r"C:\Users\houma\PycharmProjects\CountElectionVotes\ballots\sample-ballots"
 
-old_format_file = r"C:\Users\Houmqn\Desktop\conversion_test"
+#old_format_file = r"C:\Users\Houmqn\Desktop\conversion_test"
 
-ballot_folder = old_format_file
+ballot_folder = ridvan_sample_ballots
 expected_number_of_votes = 9
 
 # List all files in the directory
